@@ -1,0 +1,101 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+#include<assert.h>
+
+//定义一个数组，查找数组元素中是否包含value：6；
+bool IsExitvalue(int* arr, int Value,int len){
+	int arr[] = { 0,2,3,4,5,6,2,3,4 };
+	int Value = 6;
+	for (int i; i < len; i++) {
+		if (arr[i] == Value) {
+			return true;//break;
+		}
+	}
+	return false;
+}
+int main() {
+	int arr[] = { 0,2,3,4,5,6,2,3,4 };
+	int Value = 6;
+	int len = sizeof(arr) / sizeof(arr[0]);
+	if (IsExitvalue(arr, Value,len)) {
+		printf("存在");
+	}
+	printf("不存在");
+	
+	return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+
+//给定数组{1，2，3}  添加一个元素 value0   {0，1，2，3}
+value待删数据 len数组总大小  index 待插下标 size有效数据个数
+
+void AddValue(int*arr,int value,int len,int index,int size) {
+	assert(arr != NULL && len > 0 && index < len && size < len);
+	//移动数据
+	for (int i = size - 1; i >= index; i --) {
+		arr[i+1] = arr[i];
+	}
+	//插入元素
+	arr[index] = value;
+}
+
+int main() {
+	int arr[10] = { 1,2,3 };
+	int value = 0;
+	int len = sizeof(arr) / sizeof(arr[0]);
+	AddValue(arr, value, len,0,3);
+	return 0;
+}
+----------------------------------------------------------------------------------------------------------------
+//删除一个数组中一个指定的元素
+int  DeValue(int* arr,int value,int len) {
+	int count = 0;
+	for (int i = 0; i < len - count;i++) {
+		if (arr[i] == value) {
+			if (len - 1 == i) {
+				count = count + 1;
+				return count;
+			}
+			count++;
+			for (int j = i; j < len-1; j++) {
+				arr[j] = arr[j+1];
+			}
+			i--;
+		}
+	}
+	return count;
+}
+
+int main() {
+	int arr[] = { 2,2,2,2,3,4,6,3,7,3,2 };
+	int value = 2;
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int de_num = len - DeValue(arr, value, len);
+	for (int k = 0; k < de_num; k++) {
+		printf("%d", arr[k]);
+	}
+	return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------
+//统计数组中指定元素的个数
+
+int count(char* str,char value,int len) {
+	int count = 0;
+	for (int i = 0; i < len; i++) {
+		if (str[i] == value) {
+			count++;
+		}
+	}
+	return count;
+}
+
+
+int main() {
+	char str[] = "abchellohello";
+	char value = 'l';
+	int len = sizeof(str) / sizeof(str[0]);
+	printf("%d", count(str, value, len));
+}
+
+
