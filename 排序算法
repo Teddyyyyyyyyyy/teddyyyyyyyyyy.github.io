@@ -1,0 +1,60 @@
+ #define _CRT_SECURE_NO_WARNINGS 
+#include<stdio.h>
+ 冒泡排序
+  void MP(int* arr,int len) {
+	int t;
+	for (int i = 0; i < len-1; i++) {
+		for (int j = 0; j < len -1- i; j++) {
+			if (arr[j] > arr[j + 1]) {
+				t = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = t;
+			}
+		}
+    }
+}
+
+int main() {
+	int arr[] = { 5,1,4,8,4,7,4,5,4,6 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	MP(arr, len);
+	for (int i = 0; i < len; i++) {
+		printf("%d", arr[i]);
+	}
+}
+ 
+ 冒泡排序优化(1：在已经排序好后直接输出结果减少了后面的无用比较 2：减少了比较次数，由每一轮的最后一次交换得到最后一次交换次数bounddar1用其确定比较数据的边界，
+ 之后的次数无需比较缩短比较次数操作）
+  void MP(int* arr,int len) {
+	int t;
+	for (int i = 0; i < len-1; i++) {
+		; bool rb = true;
+		int boundary1 = len - 1;
+		int boundary = 0;
+		for (int j = 0; j < boundary1; j++) {
+			if (arr[j] > arr[j + 1]) {
+				t = arr[j];
+				arr[j] = arr[j + 1];
+				arr[j + 1] = t;
+				rb = false;
+				boundary = j;
+			}
+		}
+		boundary1 = boundary;
+		if (rb) {
+			break;
+		}
+    }
+}
+
+int main() {
+	int arr[] = { 1,2,6,4,3,2,5,6,7,3};
+	int len = sizeof(arr) / sizeof(arr[0]);
+	MP(arr, len);
+	for (int i = 0; i < len; i++) {
+		printf("%d", arr[i]);
+	}
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
